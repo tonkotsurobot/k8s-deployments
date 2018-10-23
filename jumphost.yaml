@@ -1,7 +1,7 @@
 apiVersion: apps/v1 
 kind: Deployment
 metadata:
-  name: jumphost
+  name: jumphost-ubuntu
 spec:
   selector:
     matchLabels:
@@ -17,3 +17,15 @@ spec:
         image: een625/emario-ubuntu:latest
         ports:
         - containerPort: 22
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: jumphost-ubuntu
+spec:
+  selector:
+    app: jumphost-ubuntu
+  ports:
+  - protocol: TCP
+    port: 22
+    targetPort: 22
