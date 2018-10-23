@@ -13,7 +13,7 @@ spec:
         app: jumphost-ubuntu
     spec:
       containers:
-        - name: https://hub.docker.com/r/een625/emario-ubuntu:latest
-        image: latest
+        - name: jumphost-ubuntu 
+        image: een625/emario-ubuntu:latest
         ports:
         - containerPort: 22
