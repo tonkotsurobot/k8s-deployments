@@ -1,0 +1,19 @@
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: jumphost
+spec:
+  selector:
+    matchLabels:
+      app: jumphost-ubuntu
+  replicas: 2 
+  template:
+    metadata:
+      labels:
+        app: jumphost-ubuntu
+    spec:
+      containers:
+      - name: een625/emario-ubuntu
+        image: latest
+        ports:
+        - containerPort: 22
