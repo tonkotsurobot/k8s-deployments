@@ -27,5 +27,5 @@ spec:
     app: jumphost-ubuntu
   ports:
   - protocol: TCP
-    port: 22
+    port: 10022
     targetPort: 22
