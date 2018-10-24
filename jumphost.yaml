@@ -17,15 +17,19 @@ spec:
         image: een625/emario-ubuntu:latest
         ports:
         - containerPort: 22
----
+--- 
+--- kubectl expose deployment/jumphost-ubuntu
 kind: Service
 apiVersion: v1
 metadata:
   name: jumphost-ubuntu-service
+  labels:
+    run: jumphost-ubuntu-service
 spec:
   selector:
     app: jumphost-ubuntu
   ports:
   - protocol: TCP
-    port: 10022
-    targetPort: 22
+    port: 22
+    
+
