@@ -11,7 +11,7 @@ spec:
     - name: ssh
       protocol: TCP
       port: 22
-      targetPort: 30022
+      nodePort: 31122
   selector:
     app: jumphost-ubuntu
 
