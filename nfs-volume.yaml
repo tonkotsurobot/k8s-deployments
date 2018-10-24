@@ -8,10 +8,9 @@ spec:
   accessModes:
     - ReadWriteMany
   nfs:
-    # FIXME: use the right IP
     server: 192.168.1.30
-    path: "/k8s-nfs"
-
+    path: /k8s-nfs
+---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
