@@ -8,8 +8,7 @@ metadata:
 spec:
   type: NodePort
   ports:
-  - name: ssh
-    protocol: TCP
+  - protocol: TCP
     port: 22
   selector:
     app: jumphost-ubuntu
