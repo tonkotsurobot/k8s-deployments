@@ -18,9 +18,8 @@ spec:
         ports:
         - containerPort: 22
 --- 
---- kubectl expose deployment/jumphost-ubuntu
-kind: Service
 apiVersion: v1
+kind: Service
 metadata:
   name: jumphost-ubuntu-service
   labels:
