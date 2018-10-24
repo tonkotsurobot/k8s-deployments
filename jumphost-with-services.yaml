@@ -1,0 +1,38 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jumphost-ubuntu-service
+  labels:
+    run: jumphost-ubuntu-service
+spec:
+ type: NodePort
+ports:
+  - nme: ssh
+    protocol: TCP
+    port: 22
+  selector:
+    app: jumphost-ubuntu
+
+---
+
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: jumphost-ubuntu
+spec:
+  selector:
+    matchLabels:
+      app: jumphost-ubuntu
+  replicas: 2 
+  template:
+    metadata:
+      labels:
+        app: jumphost-ubuntu
+    spec:
+      containers:
+      - name: jumphost-ubuntu 
+        image: een625/emario-ubuntu:latest
+        ports:
+        - containerPort: 22
+
