@@ -10,7 +10,7 @@ spec:
   ports:
   - protocol: TCP
     port: 22
-    targetport: 30022
+    nodePort: 30022
   selector:
     app: jumphost-ubuntu
 
