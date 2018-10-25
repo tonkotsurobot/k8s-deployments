@@ -1,3 +1,29 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs-unifi
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    server: 192.168.1.30
+    path: /k8s-nfs/unifi
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nfs-unifi
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: ""
+  resources:
+    requests:
+      storage: 1Gi
+
 ---
 apiVersion: v1
 kind: Service
@@ -37,10 +63,10 @@ spec:
         ports:
           - containerPort: 8443
         volumeMounts:
-          - name: nfs 
+          - name: nfs-unifi 
             mountPath: "/unifi"
       volumes:
       - name: nfs
         persistentVolumeClaim:
-          claimName: nfs
+          claimName: nfs-unifi
 
