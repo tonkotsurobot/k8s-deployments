@@ -66,7 +66,7 @@ spec:
           - name: nfs-unifi 
             mountPath: "/unifi"
       volumes:
-      - name: nfs
+      - name: nfs-unifi
         persistentVolumeClaim:
           claimName: nfs-unifi
 
