@@ -63,10 +63,10 @@ spec:
         ports:
           - containerPort: 8443
         volumeMounts:
-          - name: nfs 
+          - name: nfs-unifi 
             mountPath: "/unifi"
       volumes:
-      - name: nfs
+      - name: nfs-unifi
         persistentVolumeClaim:
           claimName: nfs-unifi
 
