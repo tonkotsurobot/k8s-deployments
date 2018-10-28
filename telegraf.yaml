@@ -25,23 +25,6 @@ spec:
       storage: 1Gi
 
 ---
-apiVersion: v1
-kind: Service
-metadata:
-  name: telegraf-service
-  labels:
-    run: telegraf-service
-spec:
-  type: NodePort
-  ports:
-    - name: web-port
-      protocol: TCP
-      port: 22
-      nodePort: 30444
-  selector:
-    app: telegraf
-
----
 
 apiVersion: apps/v1 
 kind: Deployment
