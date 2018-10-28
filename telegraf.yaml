@@ -64,7 +64,7 @@ spec:
           - containerPort: 22
         volumeMounts:
           - name: nfs-telegraf
-            mountPath: "/var/lib/telegraf"
+            mountPath: "/etc/telegraf"
       volumes:
       - name: nfs-telegraf
         persistentVolumeClaim:
