@@ -25,31 +25,31 @@ spec:
       storage: 1Gi
 
 ---
-#apiVersion: v1
-#kind: PersistentVolume
-#metadata:
-#  name: nfs-influxdb-var
-#spec:
-#  capacity:
-#    storage: 1Gi
-#  accessModes:
-#    - ReadWriteMany
-#  nfs:
-#    server: 192.168.1.30
-#    path: /k8s-nfs/influxdb/var
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs-influxdb-var
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    server: 192.168.1.30
+    path: /k8s-nfs/influxdb/var
 
 ---
-#apiVersion: v1
-#kind: PersistentVolumeClaim
-#metadata:
-#  name: nfs-influxdb-var
-#spec:
-#  accessModes:
-#    - ReadWriteMany
-#  storageClassName: ""
-#  resources:
-#    requests:
-#      storage: 20Gi
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nfs-influxdb-var
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: ""
+  resources:
+    requests:
+      storage: 20Gi
 
 ---
 apiVersion: v1
@@ -90,13 +90,13 @@ spec:
         volumeMounts:
           - name: nfs-influxdb-conf
             mountPath: "/etc/influxdb/"
-         # - name: nfs-influxdb-var
-      #      mountPath: "/var/lib/influxdb/"
+          - name: nfs-influxdb-var
+            mountPath: "/var/lib/influxdb/"
       volumes:
       - name: nfs-influxdb-conf
         persistentVolumeClaim:
           claimName: nfs-influxdb-conf
-     # - name: nfs-influxdb-var
-     #   persistentVolumeClaim:
-     #     claimName: nfs-influxdb-var
+      - name: nfs-influxdb-var
+        persistentVolumeClaim:
+          claimName: nfs-influxdb-var
 
