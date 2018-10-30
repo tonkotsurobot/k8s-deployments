@@ -31,7 +31,7 @@ metadata:
   name: nfs-influxdb-var
 spec:
   capacity:
-    storage: 1Gi
+    storage: 20Gi
   accessModes:
     - ReadWriteMany
   nfs:
