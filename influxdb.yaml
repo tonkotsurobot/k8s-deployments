@@ -25,31 +25,31 @@ spec:
       storage: 1Gi
 
 ---
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: nfs-influxdb-var
-spec:
-  capacity:
-    storage: 1Gi
-  accessModes:
-    - ReadWriteMany
-  nfs:
-    server: 192.168.1.30
-    path: /k8s-nfs/influxdb/var
+#apiVersion: v1
+#kind: PersistentVolume
+#metadata:
+#  name: nfs-influxdb-var
+#spec:
+#  capacity:
+#    storage: 1Gi
+#  accessModes:
+#    - ReadWriteMany
+#  nfs:
+#    server: 192.168.1.30
+#    path: /k8s-nfs/influxdb/var
 
 ---
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: nfs-influxdb-var
-spec:
-  accessModes:
-    - ReadWriteMany
-  storageClassName: ""
-  resources:
-    requests:
-      storage: 20Gi
+#apiVersion: v1
+#kind: PersistentVolumeClaim
+#metadata:
+#  name: nfs-influxdb-var
+#spec:
+#  accessModes:
+#    - ReadWriteMany
+#  storageClassName: ""
+#  resources:
+#    requests:
+#      storage: 20Gi
 
 ---
 apiVersion: v1
