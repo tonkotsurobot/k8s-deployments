@@ -1,0 +1,102 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs-influxdb-conf
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    server: 192.168.1.30
+    path: /k8s-nfs/influxdb/conf
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nfs-influxdb-conf
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: ""
+  resources:
+    requests:
+      storage: 1Gi
+
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs-influxdb-var
+spec:
+  capacity:
+    storage: 1Gi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    server: 192.168.1.30
+    path: /k8s-nfs/influxdb/var
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nfs-influxdb-var
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: ""
+  resources:
+    requests:
+      storage: 20Gi
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: influxdb-service
+  labels:
+    run: influxdb-service
+spec:
+  ports:
+    - name: web-port
+      protocol: TCP
+      port: 8086
+  selector:
+    app: influxdb
+
+---
+
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: influxdb
+spec:
+  selector:
+    matchLabels:
+      app: influxdb
+  replicas: 1 
+  template:
+    metadata:
+      labels:
+        app: influxdb
+    spec:
+      containers:
+      - name: influxdb 
+        image: influxdb:latest
+        ports:
+          - containerPort: 8086
+        volumeMounts:
+          - name: nfs-influxdb-conf
+            mountPath: "/etc/influxdb/"
+          - name: nfs-influxdb-var
+            mountPath: "/var/lib/influxdb/"
+      volumes:
+      - name: nfs-influxdb-conf
+        persistentVolumeClaim:
+          claimName: nfs-influxdb-conf
+      - name: nfs-influxdb-var
+        persistentVolumeClaim:
+          claimName: nfs-influxdb-var
+
