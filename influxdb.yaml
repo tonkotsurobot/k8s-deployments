@@ -90,13 +90,13 @@ spec:
         volumeMounts:
           - name: nfs-influxdb-conf
             mountPath: "/etc/influxdb/"
-          - name: nfs-influxdb-var
-            mountPath: "/var/lib/influxdb/"
+         # - name: nfs-influxdb-var
+      #      mountPath: "/var/lib/influxdb/"
       volumes:
       - name: nfs-influxdb-conf
         persistentVolumeClaim:
           claimName: nfs-influxdb-conf
-      - name: nfs-influxdb-var
-        persistentVolumeClaim:
-          claimName: nfs-influxdb-var
+     # - name: nfs-influxdb-var
+     #   persistentVolumeClaim:
+     #     claimName: nfs-influxdb-var
 
