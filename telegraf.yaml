@@ -42,7 +42,7 @@ spec:
     spec:
       containers:
       - name: telegraf 
-        image: nuntz/telegraf-snmp:latest
+        image: een625/telegraf-snmp:latest
         volumeMounts:
           - name: nfs-telegraf
             mountPath: "/etc/telegraf"
