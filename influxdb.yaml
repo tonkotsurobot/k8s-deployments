@@ -66,6 +66,22 @@ spec:
   selector:
     app: influxdb
 
+apiVersion: v1
+kind: Service
+metadata:
+  name: influxdb-public-service
+  labels:
+    run: influxdb-public-service
+spec:
+  type: NodePort
+  ports:
+    - name: public-port
+      protocol: TCP
+      port: 8086
+      nodePort: 30086
+  selector:
+    app: influxdb
+
 ---
 
 apiVersion: apps/v1 
