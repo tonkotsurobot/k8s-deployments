@@ -116,6 +116,7 @@ spec:
       labels:
         app: pms
     spec:
+      hostNetwork: true
       containers:
       - name: pms 
         image: plexinc/pms-docker:latest
