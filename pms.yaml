@@ -10,6 +10,7 @@ spec:
   nfs:
     server: 192.168.1.30
     path: /k8s-nfs/pms/config
+---
 
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -36,6 +37,7 @@ spec:
   nfs:
     server: 192.168.1.30
     path: /k8s-nfs/pms/transcode
+---
 
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -63,6 +65,7 @@ spec:
   nfs:
     server: 192.168.1.30
     path: /DATA/VIDEOS
+---
 
 apiVersion: v1
 kind: PersistentVolumeClaim
