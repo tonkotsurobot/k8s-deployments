@@ -1,0 +1,136 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs-pms-config
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    server: 192.168.1.30
+    path: /k8s-nfs/pms/config
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nfs-pms-config
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: ""
+  resources:
+    requests:
+      storage: 10Gi
+---
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs-pms-transcode
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    server: 192.168.1.30
+    path: /k8s-nfs/pms/transcode
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nfs-pms-transcode
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: ""
+  resources:
+    requests:
+      storage: 10Gi
+
+---
+
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: nfs-pms-data
+spec:
+  capacity:
+    storage: 100Gi
+  accessModes:
+    - ReadWriteMany
+  nfs:
+    server: 192.168.1.30
+    path: /DATA/VIDEOS
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nfs-pms-data
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: ""
+  resources:
+    requests:
+      storage: 100Gi
+
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: pms-service
+  labels:
+    run: pms-service
+spec:
+  type: NodePort
+  ports:
+    - name: web-port
+      protocol: TCP
+      port: 32400
+      nodePort: 32400
+  selector:
+    app: pms
+
+---
+
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: pms
+spec:
+  selector:
+    matchLabels:
+      app: pms
+  replicas: 1 
+  template:
+    metadata:
+      labels:
+        app: pms
+    spec:
+      containers:
+      - name: pms 
+        image: plexinc/pms-docker:latest
+        ports:
+          - containerPort: 32400
+        volumeMounts:
+          - name: nfs-pms-config
+            mountPath: "/config"
+          - name: nfs-pms-transcode
+            mountPath: "/transcode"
+          - name: nfs-pms-data
+            mountPath: "/data"
+      volumes:
+      - name: nfs-pms-config
+        persistentVolumeClaim:
+          claimName: nfs-pms-config
+      - name: nfs-pms-transcode
+        persistentVolumeClaim:
+          claimName: nfs-pms-transcode
+      - name: nfs-pms-data
+        persistentVolumeClaim:
+          claimName: nfs-pms-data
+
+
