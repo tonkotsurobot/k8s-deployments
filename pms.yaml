@@ -4,7 +4,7 @@ metadata:
   name: nfs-pms-config
 spec:
   capacity:
-    storage: 10Gi
+    storage: 1Gi
   accessModes:
     - ReadWriteMany
   nfs:
@@ -23,7 +23,7 @@ spec:
   storageClassName: ""
   resources:
     requests:
-      storage: 10Gi
+      storage: 1Gi
 ---
 
 apiVersion: v1
@@ -32,7 +32,7 @@ metadata:
   name: nfs-pms-transcode
 spec:
   capacity:
-    storage: 10Gi
+    storage: 1Gi
   accessModes:
     - ReadWriteMany
   nfs:
@@ -51,7 +51,7 @@ spec:
   storageClassName: ""
   resources:
     requests:
-      storage: 10Gi
+      storage: 1Gi
 
 ---
 
@@ -61,7 +61,7 @@ metadata:
   name: nfs-pms-data
 spec:
   capacity:
-    storage: 100Gi
+    storage: 1Gi
   accessModes:
     - ReadWriteMany
   nfs:
@@ -80,7 +80,7 @@ spec:
   storageClassName: ""
   resources:
     requests:
-      storage: 100Gi
+      storage: 1Gi
 
 ---
 
