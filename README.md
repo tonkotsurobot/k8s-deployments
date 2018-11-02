@@ -48,4 +48,3 @@ To use: Simply clone the configuration file and modify value as needed. Then app
 </table>
 
 
-unifi.yaml	add port 8080 to unifi
